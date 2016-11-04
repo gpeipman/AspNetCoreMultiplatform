@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AspNetCoreMultiplatform.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreMultiplatform.Models;
 
 namespace AspNetCoreMultiplatform.Data
 {
@@ -22,5 +18,7 @@ namespace AspNetCoreMultiplatform.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Event> Events { get; set; }
     }
 }

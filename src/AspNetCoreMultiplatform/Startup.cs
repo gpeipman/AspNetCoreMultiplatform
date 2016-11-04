@@ -17,8 +17,8 @@ namespace AspNetCoreMultiplatform
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.private.json", optional: true);
 
             if (env.IsDevelopment())
             {
@@ -68,10 +68,12 @@ namespace AspNetCoreMultiplatform
             }
 
             app.UseStaticFiles();
-
             app.UseIdentity();
 
-            // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            //var options = new MicrosoftAccountOptions();
+            //options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
+            //options.ClientSecret = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientSecret");
+            //app.UseMicrosoftAccountAuthentication(options);
 
             app.UseMvc(routes =>
             {
