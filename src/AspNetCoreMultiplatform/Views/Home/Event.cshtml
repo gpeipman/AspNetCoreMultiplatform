@@ -1,0 +1,47 @@
+@model AspNetCoreMultiplatform.Models.EventViewModels.EventViewModel
+
+@{
+    ViewData["Title"] = "Event";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Begins)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Begins)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ends)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ends)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerUserName)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

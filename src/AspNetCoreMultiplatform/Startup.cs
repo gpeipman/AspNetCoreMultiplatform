@@ -68,13 +68,24 @@ namespace AspNetCoreMultiplatform
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            var cookieOptions = new CookieAuthenticationOptions();
+            cookieOptions.AutomaticChallenge = true;
+            cookieOptions.LoginPath = "/Account/Login";
+
+            app.UseCookieAuthentication(cookieOptions);
+
             Mapper.Initialize(config =>
             {
                 config.CreateMap<Event, EventListModel>();
+                config.CreateMap<Event, EventViewModel>();
+                config.CreateMap<EventViewModel, Event>()
+                      .ForMember(m => m.Id, m => m.Ignore())
+                      .ForMember(m => m.Owner, m => m.Ignore());
             });
 
             app.UseStaticFiles();
             app.UseIdentity();
+            
 
             //var options = new MicrosoftAccountOptions();
             //options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
