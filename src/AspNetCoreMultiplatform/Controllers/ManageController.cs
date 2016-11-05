@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreMultiplatform.Models;
+using AspNetCoreMultiplatform.Data;
 using AspNetCoreMultiplatform.Models.ManageViewModels;
 using AspNetCoreMultiplatform.Services;
 using Microsoft.AspNetCore.Authorization;

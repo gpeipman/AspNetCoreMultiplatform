@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using AspNetCoreMultiplatform.Models;
+using AspNetCoreMultiplatform.Data;
 using AspNetCoreMultiplatform.Models.AccountViewModels;
 using AspNetCoreMultiplatform.Services;
 using Microsoft.AspNetCore.Authorization;

@@ -1,6 +1,7 @@
 ﻿using AspNetCoreMultiplatform.Data;
-using AspNetCoreMultiplatform.Models;
+using AspNetCoreMultiplatform.Models.EventViewModels;
 using AspNetCoreMultiplatform.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -66,6 +67,11 @@ namespace AspNetCoreMultiplatform
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Event, EventListModel>();
+            });
 
             app.UseStaticFiles();
             app.UseIdentity();

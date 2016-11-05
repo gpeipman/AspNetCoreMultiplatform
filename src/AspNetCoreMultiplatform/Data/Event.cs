@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AspNetCoreMultiplatform.Models
+namespace AspNetCoreMultiplatform.Data
 {
     public class Event
     {
@@ -13,6 +13,7 @@ namespace AspNetCoreMultiplatform.Models
         public DateTime Ends { get; set; }
 
         public string Location { get; set; }
+
         public string Description { get; set; }
 
         public ApplicationUser Owner { get; set; }
