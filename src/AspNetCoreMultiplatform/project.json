@@ -2,6 +2,10 @@
   "userSecretsId": "aspnet-AspNetCoreMultiplatform-2f548538-26d3-4e0d-98b8-70b92b34181a",
 
   "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
     "AutoMapper": "5.1.1",
     "BundlerMinifier.Core": "2.2.301",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
@@ -43,7 +47,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Npgsql": "3.1.5",
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0"
   },
 
   "tools": {
@@ -64,16 +70,7 @@
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"
-      ],
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "version": "1.0.1",
-          "type": "platform"
-        }
-      }
-    },
-    "net452": {
-
+      ]
     }
   },
 
