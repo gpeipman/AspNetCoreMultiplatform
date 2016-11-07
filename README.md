@@ -1,2 +1,2 @@
-# AspNetCoreMultiplatform
-Multiplatform web application written on ASP.NET Core
+# ASP.NET Core multiplatform application
+Sample application that works on Windows, Linux and Mac. Uses .NET Core on all platforms.
