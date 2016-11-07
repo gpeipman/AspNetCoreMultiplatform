@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace AspNetCoreMultiplatform
 {
@@ -47,6 +48,11 @@ namespace AspNetCoreMultiplatform
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
+            }
+            else if (databaseType == 2)
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseMySQL(Configuration.GetConnectionString("MysqlConnection")));
             }
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
