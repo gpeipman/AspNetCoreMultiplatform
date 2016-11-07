@@ -9,7 +9,7 @@
     "AutoMapper": "5.1.1",
     "BundlerMinifier.Core": "2.2.301",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
-    "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.1.0-preview1-final",
+    "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
