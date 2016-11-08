@@ -4,6 +4,7 @@ using AspNetCoreMultiplatform.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -69,6 +70,8 @@ namespace AspNetCoreMultiplatform
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.Use(Startup.ChangeContextToHttps);
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -101,23 +104,39 @@ namespace AspNetCoreMultiplatform
             app.UseStaticFiles();
             app.UseIdentity();
 
+            var clientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                var options = new MicrosoftAccountOptions();
+                options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
+                options.ClientSecret = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientSecret");
+                app.UseMicrosoftAccountAuthentication(options);
+            }
 
-            var options = new MicrosoftAccountOptions();
-            options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
-            options.ClientSecret = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientSecret");
-            app.UseMicrosoftAccountAuthentication(options);
-
-            var twitterOptions = new TwitterOptions();
-            twitterOptions.ConsumerKey = Configuration.GetValue<string>("Authentication:Twitter:ClientId");
-            twitterOptions.ConsumerSecret = Configuration.GetValue<string>("Authentication:Twitter:ClientSecret");
-            app.UseTwitterAuthentication(twitterOptions);
-
+            clientId = Configuration.GetValue<string>("Authentication:Twitter:ClientId");
+            if (!string.IsNullOrEmpty(clientId))
+            {
+                var twitterOptions = new TwitterOptions();
+                twitterOptions.ConsumerKey = Configuration.GetValue<string>("Authentication:Twitter:ClientId");
+                twitterOptions.ConsumerSecret = Configuration.GetValue<string>("Authentication:Twitter:ClientSecret");
+                app.UseTwitterAuthentication(twitterOptions);
+            }
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static RequestDelegate ChangeContextToHttps(RequestDelegate next)
+        {
+            return async context =>
+            {
+                context.Request.Scheme = "https";
+                await next(context);
+            };
         }
     }
 }
