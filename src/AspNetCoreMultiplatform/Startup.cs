@@ -100,12 +100,17 @@ namespace AspNetCoreMultiplatform
 
             app.UseStaticFiles();
             app.UseIdentity();
-            
 
-            //var options = new MicrosoftAccountOptions();
-            //options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
-            //options.ClientSecret = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientSecret");
-            //app.UseMicrosoftAccountAuthentication(options);
+
+            var options = new MicrosoftAccountOptions();
+            options.ClientId = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientId");
+            options.ClientSecret = Configuration.GetValue<string>("Authentication:MicrosoftAccount:ClientSecret");
+            app.UseMicrosoftAccountAuthentication(options);
+
+            var twitterOptions = new TwitterOptions();
+            twitterOptions.ConsumerKey = Configuration.GetValue<string>("Authentication:Twitter:ClientId");
+            twitterOptions.ConsumerSecret = Configuration.GetValue<string>("Authentication:Twitter:ClientSecret");
+            app.UseTwitterAuthentication(twitterOptions);
 
             app.UseMvc(routes =>
             {
